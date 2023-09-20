@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "hng_stage_three",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,12 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@supabase/auth-helpers-nextjs": "^0.8.1",
+    "@supabase/auth-ui-react": "^0.4.5",
+    "@supabase/auth-ui-shared": "^0.1.7",
+    "@supabase/supabase-js": "^2.34.0",
     "@types/node": "20.1.1",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
+    "array-move": "^4.0.0",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.1",
+    "framer-motion": "^10.16.4",
     "next": "13.4.1",
+    "popmotion": "^11.0.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "typescript": "5.0.4"
