@@ -2,3 +2,80 @@
   padding: 0;
   margin: 0;
 }
+.dropdown {
+  position: relative;
+}
+body {
+  background-color: #080710;
+  color: white;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 1000;
+  display: none;
+  min-width: 150px;
+  margin: 0.125rem 0 0;
+  font-size: 1rem;
+  color: #212529;
+  text-align: left;
+  list-style: none;
+  background-clip: padding-box;
+  border-radius: 0.25rem;
+  background-color: #080710a5;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(60px);
+}
+.dropdown-menu li {
+  color: white;
+  border-bottom: 1px solid white;
+  padding: 1rem;
+  padding-bottom: 0.3rem;
+  cursor: pointer;
+}
+.toggler {
+  all: unset;
+  padding: 0.75rem 1.5rem;
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 0.25rem;
+  background-color: #080710a5;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+}
+.dropdown-menu-left {
+  right: auto;
+  left: 0;
+}
+.dropdown-menu-right {
+  right: 0;
+  left: auto;
+}
+.dropdown-menu.show {
+  display: block;
+}
+.navbar {
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.13);
+  padding: 0 2rem;
+}
+.brand {
+  color: white;
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-size: 25px;
+  line-height: 30px;
+}
+li {
+  list-style: none;
+}

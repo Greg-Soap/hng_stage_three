@@ -1,3 +1,4 @@
+import Navbar from "@/components/Navbar";
 import "./globals.css";
 import createClient from "@/utils/supabase-server";
 
@@ -15,10 +16,13 @@ export default async function RootLayout({
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  console.log(user);
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Navbar user={user} />
+
+        {children}
+      </body>
     </html>
   );
 }
