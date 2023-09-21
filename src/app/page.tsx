@@ -39,16 +39,20 @@ export default function Home() {
         </h2>
       </div>
       <div className="App">
-        <Reorder.Group
-          axis="y"
-          onReorder={setFilteredImages}
-          values={filteredImages}
-          className="card_wrapper"
-        >
-          {filteredImages.map((item) => (
-            <Item key={item} imgUrl={item} user={user} id={item} />
-          ))}
-        </Reorder.Group>
+        {!user ? (
+          <h2 className="hero_lead">Please Sign In to access Gallery</h2>
+        ) : (
+          <Reorder.Group
+            axis="y"
+            onReorder={setFilteredImages}
+            values={filteredImages}
+            className="card_wrapper"
+          >
+            {filteredImages.map((item) => (
+              <Item key={item} imgUrl={item} user={user} id={item} />
+            ))}
+          </Reorder.Group>
+        )}
       </div>
     </>
   );
