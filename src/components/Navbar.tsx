@@ -5,7 +5,7 @@ import React from "react";
 import { DropdownOptions, DropdownToggler } from "./dropdown";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
-export default function Navbar({ user }: { user: User | null }) {
+export default function Navbar({ user }: { user: User | undefined }) {
   const supabase = createClientComponentClient();
   return (
     <nav className="navbar">

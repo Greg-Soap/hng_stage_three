@@ -1,48 +1,79 @@
 "use client";
 import { Reorder, useDragControls, useMotionValue } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRaisedShadow } from "@/utils/useRaisedShadow";
 import { ReorderIcon } from "@/components/dragIcon";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import {
+  User,
+  createClientComponentClient,
+} from "@supabase/auth-helpers-nextjs";
+import Navbar from "@/components/Navbar";
+import Image from "next/image";
+import { imageGallerylist } from "./data";
 
-export default async function Home() {
+export default function Home() {
+  const [user, setUser] = useState<User>();
+  const [filteredImages, setFilteredImages] = useState(imageGallerylist);
   const supabase = createClientComponentClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  const [items, setItems] = useState(posts);
+  useEffect(() => {
+    async function fetchUser() {
+      try {
+        const { data, error } = await supabase.auth.getUser();
+        if (error) {
+          throw error;
+        }
+        setUser(data.user);
+      } catch (error) {
+        console.error("Error fetching user:", error);
+      }
+    }
+
+    fetchUser();
+  }, [supabase.auth]);
   return (
-    <div className="App">
-      <Reorder.Group
-        axis="y"
-        onReorder={setItems}
-        values={items}
-        className="card_wrapper"
-      >
-        {items.map((item) => (
-          <Item key={item} item={item} user={user} drag />
-        ))}
-      </Reorder.Group>
-    </div>
+    <>
+      <Navbar user={user} />
+      <div className="hero">
+        <h2 className="hero_lead">
+          Empowering Your Gallery: Arrange with Simplicity.
+        </h2>
+      </div>
+      <div className="App">
+        <Reorder.Group
+          axis="y"
+          onReorder={setFilteredImages}
+          values={filteredImages}
+          className="card_wrapper"
+        >
+          {filteredImages.map((item) => (
+            <Item key={item} imgUrl={item} user={user} id={item} />
+          ))}
+        </Reorder.Group>
+      </div>
+    </>
   );
 }
-function Item({ item, user }: any) {
+interface ImageCardProps {
+  id: string;
+  imgUrl: string;
+  user: User | undefined;
+}
+function Item({ imgUrl, id, user }: ImageCardProps) {
   const y = useMotionValue(0);
   const boxShadow = useRaisedShadow(y);
   const dragControls = useDragControls();
 
   return (
     <Reorder.Item
-      value={item}
-      id={item}
+      value={id}
+      key={id}
       style={{ boxShadow, y }}
       dragListener={false}
-      dragControls={user && dragControls}
+      dragControls={dragControls}
       className="card"
       drag
     >
-      <h4>List Item {item}</h4>
-      <p>this is inside the card</p>
+      <Image src={imgUrl} alt="Gallery" width={285} height={200} />
       {user && (
         <span className="dragger">
           <ReorderIcon dragControls={dragControls} />
@@ -51,5 +82,3 @@ function Item({ item, user }: any) {
     </Reorder.Item>
   );
 }
-
-const posts = [0, 1, 2, 3, 4, 5, 6, 7, 8];
