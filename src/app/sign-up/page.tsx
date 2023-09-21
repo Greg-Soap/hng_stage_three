@@ -4,14 +4,12 @@ import { useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Link from "next/link";
 import style from "../login/page.module.css";
-import { useRouter } from "next/navigation";
 function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const router = useRouter();
 
   const supabase = createClientComponentClient();
 
@@ -55,8 +53,9 @@ function SignUp() {
       displayErrorMessage(error.message);
       setIsSubmitting(false);
     } else {
-      displaySuccessMessage("Success! Please login with your credentials");
-      router.push("/login");
+      displaySuccessMessage(
+        "Success! Please Check your email for further instructions"
+      );
       setIsSubmitting(false);
     }
   }
