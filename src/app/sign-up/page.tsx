@@ -55,9 +55,9 @@ function SignUp() {
       displayErrorMessage(error.message);
       setIsSubmitting(false);
     } else {
-      displaySuccessMessage("Success!");
+      displaySuccessMessage("Success! Please login with your credentials");
+      router.push("/login");
       setIsSubmitting(false);
-      router.push("/");
     }
   }
 
